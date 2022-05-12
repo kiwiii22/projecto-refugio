@@ -1,0 +1,30 @@
+version: "3.9"
+# Declaracion de servicios
+services:
+  # Instancia de postgres
+  db:
+    # Descargamos imagen oficial de postgres
+    image: postgres
+    # Seteamos variables de entorno
+    environment:
+      POSTGRES_USER: root #Nombre de Usuario
+      POSTGRES_DB: Proyecto #Nombre de la base de datos
+      POSTGRES_PASSWORD: 1234 #Contraseña del usuario 
+    # Exponemos nuestro volumen de datos
+    volumes:
+      - pgdata:/var/lib/posgresql/data
+  # Instancia de django
+  frontend:
+    # Construimos la imagen de Dockerfile
+    build: ./refugiodemascotas #Carpeta que contiene el dockerfile
+    # Se expone el puerto al exterior
+    ports:
+      - "8000:8000" #Se puede cambiar el puerto El primero se puede cambiar y el segudo el puerto de Docker File
+    # Exponemos volumen de frontend
+    volumes:
+      - ./frontend:/frontend
+    # Depende de DB
+    depends_on:
+      - db
+volumes:
+  pgdata:
