@@ -1,0 +1,42 @@
+
+{% block title %}Listado de mascotas{% endblock %}
+{% load crispy_forms_tags %}
+{% block content %}
+<!--Table-->
+<div class="container">
+        <div class="col-md-8">
+            <hr>
+            <table class="table bg-white">
+                <thead class="bg-info">
+                    <tr class="text-white">
+                        <th scope="col">ID</th>
+                        <th scope="col">Nombre</th>
+                        <th scope="col">Especie</th>
+                        <th scope="col">Sexo</th>
+                        <th scope="col">Edad</th>
+                        <th scope="col">Fecha de rescate</th>
+                        
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for item in items %}
+                    <tr>
+                        <td>{{item.id}}</td>
+                        <td>{{ item.nombre }}</td>
+                        <td>{{item.especie}}</td>
+                        <td>{{ item.sexo }}</td>
+                        <td>{{ item.edad }}</td>
+                        <td>{{item.fecha_rescate}}</td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+</div>
+
+
+
+<!--End Table-->
+{% endblock %}

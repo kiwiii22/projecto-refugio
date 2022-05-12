@@ -1,0 +1,48 @@
+
+{% block title %}Listado de Adopciones{% endblock %}
+
+{% block content%}
+
+
+<!--Table-->
+<div class="container">
+    <div class="row my-4">
+        <div class="col-md-4">
+
+        </div>
+        <div class="col-md-8">
+            <table class="table bg-white">
+                <thead class="bg-info">
+                    <tr class="text-white">
+                        <th scope="col">Animal</th>
+                        <th scope="col">Razones para adoptar</th>
+                        <th scope="col">Solicitud por</th>
+                        <th scope="col">Edad del solicitante</th>
+                        <th scope="col">Direccion</th>
+                        <th scope="col">Dia de solicitud</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for orders in orders %}
+                    <tr>
+                        <td>{{orders.nombre_de_mascota }}</td>
+                        <td>{{orders.razones_para_adoptar}}</td>
+                        <td> {{orders.staff.username}}</td>
+                        <td>{{orders.edad_solicitante}}</td>
+                        <td>{{orders.direccion}}</td>
+                        <td>
+                            {{orders.date}}
+                        </td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+</div>
+
+
+
+<!--End Table-->
+{% endblock %}

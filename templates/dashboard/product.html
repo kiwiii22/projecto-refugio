@@ -1,0 +1,83 @@
+{% extends 'partials/base.html' %}
+{% block title %}Mascotas{% endblock %}
+{% load crispy_forms_tags %}
+{% block content %}
+{% include 'partials/topnav.html' %}
+<!--Table-->
+<div class="container">
+    {% if user.is_authenticated %}
+    <div class="row my-4">
+        <div class="col-md-4">
+            {% for message in messages %}
+            {% if message %}
+            <div class="alert alert--{{message.tags}}">
+                {{message}}
+            </div>
+            {% endif %}
+            {% endfor %}
+            <div class="border bg-white p-3">
+                <h4>Añadir Mascota</h4>
+                <hr>
+                <form method="POST" enctype="multipart/form-data">
+                    {% csrf_token %}
+                    {{ form|crispy }}
+                    <input class="btn btn-success btn-block" type="submit" value="Añadir">
+
+                </form>
+            </div>
+
+
+        </div>
+        
+        {% endif %}
+        <div class="col-md-8">
+            <hr>
+            <table class="table bg-white">
+                <thead class="bg-info">
+                    <tr class="text-white">
+                        <th scope="col">ID</th>
+                        <th scope="col">Nombre</th>
+                        <th scope="col">Especie</th>
+                        <th scope="col">Sexo</th>
+                        <th scope="col">Edad</th>
+                        <th scope="col">Fecha de rescate</th>
+                        <th scope="col">Foto</th>
+                        {% if user.is_authenticated %}
+                        <th scope="col">Actividad</th>
+                        {% endif %}
+                        
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for item in items %}
+                    <tr>
+                        <td>{{item.id}}</td>
+                        <td>{{ item.nombre }}</td>
+                        <td>{{item.especie}}</td>
+                        <td>{{ item.sexo }}</td>
+                        <td>{{ item.edad }}</td>
+                        <td>{{item.fecha_rescate}}</td>
+                        <td> 
+                            <div class="col-md-8">
+                                <img class="img-thumbnail" src="{{ item.image.url }}" alt="">
+                            </div></td>
+                        <td>
+                            {% if user.is_authenticated %}
+                            <a class="btn btn-info btn-sm" href="{% url 'dashboard-product-update' item.id %}">Editar</a>
+                            
+                            <a class="btn btn-danger btn-sm" href="{% url 'dashboard-product-delete' item.id %}">Borrar</a>
+                            {% endif %}
+                        </td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+</div>
+
+
+
+<!--End Table-->
+{% endblock %}

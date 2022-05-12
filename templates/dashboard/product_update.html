@@ -1,0 +1,22 @@
+{% extends 'partials/base.html' %}
+{% block title %}Edicion de mascotas{% endblock %}
+{% load crispy_forms_tags %}
+{% block content%}
+<div class="container">
+    <div class="row mt-5">
+        <div class="col-md-6 offset-md-3">
+            <div class="border bg-white p-3">
+                <h3>Editar mascota</h3>
+                <hr>
+                <form method="POST" enctype="multipart/form-data">
+                    {% csrf_token %}
+                    {{ form | crispy }}
+                    {{ product_form | crispy }}
+                    <a class="btn btn-secundary" href="{% url 'dashboard-product' %}">Cancelar</a>
+                    <input class="btn btn-info" type="submit" value="Cargar">
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

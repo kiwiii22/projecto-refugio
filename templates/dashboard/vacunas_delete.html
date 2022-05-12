@@ -1,0 +1,24 @@
+{% extends 'partials/base.html' %}
+{% block title %}Borrado de vacunas{% endblock %}
+
+{% block content%}
+<div class="container">
+    <div class="row mt-5">
+        <div class="col-md-6 offset-md-3">
+            <div class="border bg-white p-3">
+                <h3>Borrar vacuna</h3>
+                <hr>
+                <div class="alert alert-danger">
+                    <h4>¿Eliminar vacuna?</h4>
+                </div>
+                <form method="POST">
+                    {% csrf_token %}
+                    {{ formvacunas }}
+                    <a class="btn btn-secundary" href="{% url 'dashboard-vacunas' %}">Cancelar</a>
+                    <input class="btn btn-danger" type="submit" value="Confirm">
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

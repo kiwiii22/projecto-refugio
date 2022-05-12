@@ -1,0 +1,21 @@
+{% extends 'partials/base.html' %}
+{% block title %}Edicion de vacunas{% endblock %}
+{% load crispy_forms_tags %}
+{% block content%}
+<div class="container">
+    <div class="row mt-5">
+        <div class="col-md-6 offset-md-3">
+            <div class="border bg-white p-3">
+                <h3>Editar vacuna</h3>
+                <hr>
+                <form method="POST">
+                    {% csrf_token %}
+                    {{ formvacunas | crispy }}
+                    <a class="btn btn-secundary" href="{% url 'dashboard-vacunas' %}">Cancelar</a>
+                    <input class="btn btn-info" type="submit" value="Cargar">
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
